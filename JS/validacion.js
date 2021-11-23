@@ -191,3 +191,14 @@ function cambio(e) {
         document.getElementsByName('escuela')[0].value = "";
     }
 }
+
+$(window).resize(function() {
+    if (window.matchMedia('(max-width: 767px)').matches) {
+        $('#escom-logo').hide();
+        $('#ipn-logo').hide();
+    }
+    else{
+        $('#escom-logo').show();
+        $('#ipn-logo').show();
+    }
+});
