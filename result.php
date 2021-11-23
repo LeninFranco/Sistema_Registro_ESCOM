@@ -59,7 +59,12 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
         <div class="container-fluid">
-            <a href="index.php" class="navbar-brand">ESCOM | IPN</a>
+            <a href="index.html" class="navbar-brand">ESCOM | IPN</a>
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Recuperar informacion</a>
+                </li>
+            </ul>
             <img src="img/logoESCOMBlanco.png" width="70px" height="60px">
         </div>
     </nav>
@@ -98,7 +103,7 @@
             <div class="d-grid">
                 <input type="button" value="Modificar" class="btn btn-primary" onclick="retornar()">
                 <br>
-                <a href="procesar.php" class="btn btn-primary" target="_blank">Confirmar</a>
+                <a href="procesar.php" class="btn btn-primary">Confirmar</a>
                 <br>
             </div>
         </div>
