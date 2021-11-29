@@ -160,7 +160,7 @@
     </nav>
     <div class="container">
         <div class="row pt-4" style="text-align: center;">
-            <h1>¡Recupera tu Ficha de Recuperacion!</h1>
+            <h1>¡Recupera tu Ficha de Registro!</h1>
             <h3>Favor de ingresar su numero de boleta usada para su registro</h3>
             <br>
             <div class="card bg-primary">
