@@ -60,11 +60,6 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
         <div class="container-fluid">
             <a href="index.html" class="navbar-brand">ESCOM | IPN</a>
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Recuperar informacion</a>
-                </li>
-            </ul>
             <img src="img/logoESCOMBlanco.png" width="70px" height="60px">
         </div>
     </nav>
@@ -73,7 +68,7 @@
             <div class="col-12">
                 <h1 align="center">Hola <?php echo $nombre ?>, verifica que los datos que ingrsaste sean correctos</h1>
             </div>
-            <div class="col-4 pt-2">
+            <div class="col-md-4 col-sm-12 pt-2">
                 <h2>Datos de Identidad</h2>
                 <p><strong>No. Boleta: </strong> <?php echo $boleta ?></p>
                 <p><strong>Nombre(s): </strong> <?php echo $nombre ?></p>
@@ -83,7 +78,7 @@
                 <p><strong>CURP: </strong> <?php echo $curp ?></p>
                 <p><strong>Sexo: </strong> <?php echo $sexo ?></p>
             </div>
-            <div class="col-4 pt-2">
+            <div class="col-md-4 col-sm-12 pt-2">
                 <h2>Datos de Contacto</h2>
                 <p><strong>Calle </strong> <?php echo $calle ?></p>
                 <p><strong>No: </strong> <?php echo $no ?></p>
@@ -93,7 +88,7 @@
                 <p><strong>Correo Electronico: </strong> <?php echo $correo ?></p>
                 <p><strong>Numero de Telefono: </strong> <?php echo $tel ?></p>
             </div>
-            <div class="col-4 pt-2">
+            <div class="col-md-4 col-sm-12 pt-2">
                 <h2>Datos de Procedencia</h2>
                 <p><strong>Escuela de Procedencia: </strong> <?php echo $escuela ?></p>
                 <p><strong>Entidad Federativa de Procedencia: </strong> <?php echo $estado ?></p>
