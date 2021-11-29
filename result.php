@@ -66,7 +66,7 @@
     <div class="container">
         <div class="row pt-4">
             <div class="col-12">
-                <h1 align="center">Hola <?php echo $nombre ?>, verifica que los datos que ingrsaste sean correctos</h1>
+                <h1 align="center">Hola <?php echo $nombre ?>, verifica que los datos que ingresaste sean correctos</h1>
             </div>
             <div class="col-md-4 col-sm-12 pt-2">
                 <h2>Datos de Identidad</h2>
