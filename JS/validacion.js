@@ -1,13 +1,13 @@
 const expresiones = {
     boleta: /^(PP|PE)[0-9]{8}|([0-9]{10})$/,
-    nombre: /^([A-Z][a-z]+)|([A-Z][a-z]+\s[A-Z][a-z]+)$/,
-    apellido: /^[A-Z][a-z]+$/,
+    nombre: /^([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)|([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)$/,
+    apellido: /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+$/,
     curp: /^[A-Z]{1}[AEIOU]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$/,
     cp: /^[0-9]{5}$/,
     correo: /^\S+@\S+\.\S+$/,
     telefono: /^(55|56)[0-9]{8}$/,
     solonum: /^[0-9]+$/,
-    soloalpha: /^[0-9a-zA-Z\s]+$/
+    soloalpha: /^[0-9a-zA-ZÁÉÍÓÚÑáéíóúñ\s]+$/
 }
 
 //Validacion de la boleta
