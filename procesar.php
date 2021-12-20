@@ -33,14 +33,16 @@
     {   
         // Cabecera
         foreach($header as $col)
-            $this->Cell(90,10,$col,1);
+            $str = utf8_decode($col);
+            $this->Cell(90,10,$str,1);
         $this->Ln();
         // Datos
 
         $i = 1;
         foreach($campos as $row)
-        {
-            $this->Cell(90,10,$row,1,0,'C');
+        {   
+            $str = utf8_decode($row);
+            $this->Cell(90,10,$str,1,0,'C');
             $str = utf8_decode($datos[$i++]);
             $this->Cell(90,10,$str,1,0,'C');
             $this->Ln();
@@ -81,7 +83,7 @@
             $row = mysqli_query($conn,"SELECT count(boleta) as cupo FROM alumnoexamen WHERE codigo = $i GROUP BY codigo");
             $col = mysqli_fetch_assoc($row);
             if(isset($col['cupo'])){
-                if($col['cupo'] < 30){
+                if($col['cupo'] < 9){
                     $fila = mysqli_query($conn,"SELECT lab, horario FROM examenes WHERE codigo = $i");
                     $columnas = mysqli_fetch_array($fila);
                     $lab = $columnas['lab'];
@@ -99,70 +101,67 @@
                 break;
             }
         }
+        $pdf = new PDF();
+
+        $header = array('Campo', 'Datos usuario');
+        $campos = array('No de boleta','Nombre','Apelido paterno','Apellido Materno','Fecha de nacimiento','CURP','Sexo','Calle','No','Colonia','CP','Alcaldía','Email','Teléfono','Escuela','Entidad Federativa','Promedio','No opción');
+    
+        $data = array('5555','juan');
+        $pdf->AliasNbPages();
+        $pdf->AddPage();
+        $pdf->SetFont('Times','',12);
+        $pdf->BasicTable($header,$campos,$datos);
+        $pdf->SetFont('Times','B',15);
+        $pdf->Write(10,"Sede: $lab\n");
+        $pdf->Write(10,"Fecha y Horario: $horario\n");
+        $pdf->Close();
+        $file = basename('ficha_registro_escom');
+        $file .= '.pdf';
+        $pdf->Output($file, 'F');
+        
+        //Enviar por correo
+        
+        $mail = new PHPMailer(true);
+    
+        try {
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
+    
+            //Server settings
+            $mail->SMTPDebug = 0;                      //Enable verbose debug output
+            $mail->isSMTP();       
+            $mail->CharSet = 'UTF-8';                                //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'escomequipo1@gmail.com';                     //SMTP username
+            $mail->Password   = 'escombros';                               //SMTP password
+            $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
+            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    
+            //Recipients
+            $mail->setFrom('escomequipo1@gmail.com', 'ESCOM');
+            $mail->addAddress($datos[13]);     //Add a recipient
+    
+            //Attachments
+            $mail->addAttachment('ficha_registro_escom.pdf');         //Add attachments
+    
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Ficha de Registro';
+            $mail->Body    = 'Se anexa el documento PDF con sus datos de registro, asi como la sede y fecha de su examen diagnóstico';
+    
+            $mail->send();
+            unlink('ficha_registro_escom.pdf');
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
     }
 
-    //Generamos el PDF y 
-    
-    $pdf = new PDF();
-
-    $header = array('Campo', 'Datos usuario');
-    $campos = array('No de boleta','Nombre','Apelido paterno','Apellido Materno','Fecha de nacimiento','CURP','Sexo','Calle','No','Colonia','CP','Alcaldia','Email','Telefono','Escuela','Entidad Federativa','Promedio','No opcion');
-
-    $data = array('5555','juan');
-    $pdf->AliasNbPages();
-    $pdf->AddPage();
-    $pdf->SetFont('Times','',12);
-    $pdf->BasicTable($header,$campos,$datos);
-    $pdf->SetFont('Times','B',15);
-    $pdf->Write(10,"Sede: $lab\n");
-    $pdf->Write(10,"Fecha y Horario: $horario\n");
-    $pdf->Close();
-    $file = basename('ficha_registro_escom');
-    $file .= '.pdf';
-    $pdf->Output($file, 'F');
-    
-    //Enviar por correo
-    
-    $mail = new PHPMailer(true);
-
-    try {
-        $mail->SMTPOptions = array(
-            'ssl' => array(
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-                'allow_self_signed' => true
-            )
-        );
-
-        //Server settings
-        $mail->SMTPDebug = 0;                      //Enable verbose debug output
-        $mail->isSMTP();       
-        $mail->CharSet = 'UTF-8';                                //Send using SMTP
-        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'escomequipo1@gmail.com';                     //SMTP username
-        $mail->Password   = 'escombros';                               //SMTP password
-        $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
-        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-        //Recipients
-        $mail->setFrom('escomequipo1@gmail.com', 'ESCOM');
-        $mail->addAddress($datos[13]);     //Add a recipient
-
-        //Attachments
-        $mail->addAttachment('ficha_registro_escom.pdf');         //Add attachments
-
-        //Content
-        $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Ficha de Registro';
-        $mail->Body    = 'Se anexa el documento PDF con sus datos de registro, asi como la sede y fecha de su examen de admisión';
-
-        $mail->send();
-        unlink('ficha_registro_escom.pdf');
-    } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-    }
-    
     session_unset();
 ?>
 
@@ -187,13 +186,13 @@
         <div class="row pt-4" style="text-align: center;">
             <?php if (!$result) { ?>
                 <h1>¡Ya tenemos tu registro!</h1>
-                <h3>Espera tu correo electronico</h3>
+                <h3>Espera tu correo electrónico</h3>
                 <img src="img/burrito-bad.png" style="width: 200px; height: 250px; display:block; margin:auto;">
             <?php } ?>
             <?php if ($result) { ?>
                 <h1>¡Gracias por registrarte!</h1>
                 <h3>Sus datos fueron almacenados correctamente</h3>
-                <h3>Le enviamos un correo electronico con la fecha y sede de su examen diagnostico</h3>
+                <h3>Le enviamos un correo electrónico con la fecha y sede de su examen diagnóstico</h3>
                 <img src="img/burrito-nice.png" style="width: 250px; height: 200px; display:block; margin:auto;">
             <?php } ?>
         </div>

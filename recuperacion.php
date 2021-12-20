@@ -36,15 +36,16 @@
     {   
         // Cabecera
         foreach($header as $col)
-            $this->Cell(90,10,$col,1);
+            $str = utf8_decode($col);
+            $this->Cell(90,10,$str,1);
         $this->Ln();
         // Datos
 
         $i = 0;
         foreach($campos as $row)
         {
-            $this->Cell(90,10,$row,1,0,'C');
-            $str = utf8_decode($datos[$i++]);
+            $str = utf8_decode($row);
+            $this->Cell(90,10,$str,1,0,'C');
             $this->Cell(90,10,$str,1,0,'C');
             $this->Ln();
         }
@@ -73,7 +74,7 @@
             $pdf = new PDF();
     
             $header = array('Campo', 'Datos usuario');
-            $campos = array('No de boleta','Nombre','Apelido paterno','Apellido Materno','Fecha de nacimiento','CURP','Sexo','Calle','No','Colonia','CP','Alcaldia','Email','Telefono','Escuela','Entidad Federativa','Promedio','No opcion');
+            $campos = array('No de boleta','Nombre','Apelido paterno','Apellido Materno','Fecha de nacimiento','CURP','Sexo','Calle','No','Colonia','CP','Alcaldía','Email','Teléfono','Escuela','Entidad Federativa','Promedio','No opción');
         
             $data = array('5555','juan');
             $pdf->AliasNbPages();
@@ -122,7 +123,7 @@
                 //Content
                 $mail->isHTML(true);                                  //Set email format to HTML
                 $mail->Subject = 'Recuperación Ficha de Registro';
-                $mail->Body    = 'Se anexa el documento PDF con sus datos de registro, asi como la sede y fecha de su examen de admisión';
+                $mail->Body    = 'Se anexa el documento PDF con sus datos de registro, asi como la sede y fecha de su examen diagnóstico';
         
                 $mail->send();
                 unlink('ficha_registro_escom.pdf');
@@ -161,7 +162,7 @@
     <div class="container">
         <div class="row pt-4" style="text-align: center;">
             <h1>¡Recupera tu Ficha de Registro!</h1>
-            <h3>Favor de ingresar su numero de boleta usada para su registro</h3>
+            <h3>Favor de ingresar su número de boleta usada en su registro</h3>
             <br>
             <div class="card bg-primary">
                 <div class="card-header text-white"></div>

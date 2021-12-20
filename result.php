@@ -84,9 +84,9 @@
                 <p><strong>No: </strong> <?php echo $no ?></p>
                 <p><strong>Colonia: </strong> <?php echo $colonia ?></p>
                 <p><strong>Codigo Postal: </strong> <?php echo $cp ?></p>
-                <p><strong>Alcaldia: </strong> <?php echo $alcaldia ?></p>
-                <p><strong>Correo Electronico: </strong> <?php echo $correo ?></p>
-                <p><strong>Numero de Telefono: </strong> <?php echo $tel ?></p>
+                <p><strong>Alcaldía: </strong> <?php echo $alcaldia ?></p>
+                <p><strong>Correo Electrónico: </strong> <?php echo $correo ?></p>
+                <p><strong>Número de Teléfono: </strong> <?php echo $tel ?></p>
             </div>
             <div class="col-md-4 col-sm-12 pt-2">
                 <h2>Datos de Procedencia</h2>
