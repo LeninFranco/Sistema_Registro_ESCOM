@@ -50,6 +50,30 @@
         );
         $sql = "INSERT INTO alumnos VALUES('$datos[1]','$datos[2]','$datos[3]','$datos[4]','$datos[5]','$datos[6]','$datos[7]','$datos[8]','$datos[9]','$datos[10]','$datos[11]','$datos[12]','$datos[13]','$datos[14]','$datos[15]','$datos[16]','$datos[17]','$datos[18]')";
         $result = mysqli_query($conn,$sql);
+        if($result){
+            for($i=1;$i<=18;$i++){
+                $row = mysqli_query($conn,"SELECT count(boleta) as cupo FROM alumnoexamen WHERE codigo = $i GROUP BY codigo");
+                $col = mysqli_fetch_assoc($row);
+                if(isset($col['cupo'])){
+                    if($col['cupo'] < 30){
+                        $fila = mysqli_query($conn,"SELECT lab, horario FROM examenes WHERE codigo = $i");
+                        $columnas = mysqli_fetch_array($fila);
+                        $lab = $columnas['lab'];
+                        $horario = $columnas['horario'];
+                        $resultado = mysqli_query($conn,"INSERT INTO alumnoexamen VALUES('$datos[1]',$i)");
+                        break;
+                    }
+                }
+                if(!isset($col['cupo'])){
+                    $fila = mysqli_query($conn,"SELECT lab, horario FROM examenes WHERE codigo = $i");
+                    $columnas = mysqli_fetch_array($fila);
+                    $lab = $columnas['lab'];
+                    $horario = $columnas['horario'];
+                    $resultado = mysqli_query($conn,"INSERT INTO alumnoexamen VALUES('$datos[1]',$i)");
+                    break;
+                }
+            }
+        }
         $_SESSION['color'] = "success";
         $_SESSION['message'] = "Alumno Guardado Correctamente";
         header("Location: ../crud.php");
@@ -72,7 +96,7 @@
             <a href="../crud.php" class="navbar-brand">ESCOM | IPN</a>
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a href="../logout.php" class="nav-link">Cerrar Sesion</a>
+                    <a href="../logout.php" class="nav-link">Cerrar Sesión</a>
                 </li>
             </ul>
             <img src="../../img/logoESCOMBlanco.png" width="70px" height="60px">
@@ -89,8 +113,8 @@
                         <div class="card-body bg-secondary">
                             <div class="row">
                                 <div class="col-md-3 col-sm-12">
-                                    <label>Numero de Boleta</label>
-                                    <input type="text" name="boleta" placeholder="Numero de Boleta" class="form-control" required>
+                                    <label>Número de Boleta</label>
+                                    <input type="text" name="boleta" placeholder="Número de Boleta" class="form-control" required>
                                 </div>
                                 <div class="col-md-3 col-sm-12">
                                     <label>Nombre(s)</label>
@@ -108,7 +132,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-3 col-sm-12">
-                                    <label>Fecha de naciemiento</label>
+                                    <label>Fecha de nacimiento</label>
                                     <input type="date" name="fecha" class="form-control" required>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
@@ -143,14 +167,14 @@
                                     <input type="text" name="colonia" placeholder="Colonia" class="form-control" required>
                                 </div>
                                 <div class="col-md-3 col-sm-12">
-                                    <label>Codigo Postal (CP)</label>
-                                    <input type="text" name="cp" placeholder="Codigo Postal" class="form-control" required>
+                                    <label>Código Postal (CP)</label>
+                                    <input type="text" name="cp" placeholder="Código Postal" class="form-control" required>
                                 </div>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-md-3 col-sm-12">
-                                    <label>Alcaldia</label>
+                                    <label>Alcaldía</label>
                                     <select class="form-select" name="alcaldia" required>
                                         <option value="Álvaro Obregón" selected>Álvaro Obregón</option>
                                         <option value="Azcapotzalco">Azcapotzalco</option>
@@ -171,12 +195,12 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
-                                    <label>Correo Electronico</label>
-                                    <input type="text" name="correo" placeholder="Correo Electronico" class="form-control" required>
+                                    <label>Correo Electrónico</label>
+                                    <input type="text" name="correo" placeholder="Correo Electrónico" class="form-control" required>
                                 </div>
                                 <div class="col-md-3 col-sm-12">
-                                    <label>Telefono (Celular)</label>
-                                    <input type="text" name="tel" placeholder="Numero de Telefono" class="form-control" required>
+                                    <label>Teléfono (Celular)</label>
+                                    <input type="text" name="tel" placeholder="Numero de Teléfono" class="form-control" required>
                                 </div>
                             </div>
                         </div>

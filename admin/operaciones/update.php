@@ -78,7 +78,7 @@
             <a href="../crud.php" class="navbar-brand">ESCOM | IPN</a>
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a href="../logout.php" class="nav-link">Cerrar Sesion</a>
+                    <a href="../logout.php" class="nav-link">Cerrar Sesión</a>
                 </li>
             </ul>
             <img src="../../img/logoESCOMBlanco.png" width="70px" height="60px">
@@ -95,8 +95,8 @@
                         <div class="card-body bg-secondary">
                             <div class="row">
                                 <div class="col-md-3 col-sm-12">
-                                    <label>Numero de Boleta</label>
-                                    <input type="text" name="boleta" value="<?php if(isset($row)) echo $row['boleta']; ?>" placeholder="Numero de Boleta" class="form-control" required>
+                                    <label>Número de Boleta</label>
+                                    <input type="text" name="boleta" value="<?php if(isset($row)) echo $row['boleta']; ?>" placeholder="Número de Boleta" class="form-control" readonly required>
                                 </div>
                                 <div class="col-md-3 col-sm-12">
                                     <label>Nombre(s)</label>
@@ -114,7 +114,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-3 col-sm-12">
-                                    <label>Fecha de naciemiento</label>
+                                    <label>Fecha de nacimiento</label>
                                     <input type="date" name="fecha" value="<?php if(isset($row)) echo $row['nacimiento']; ?>" class="form-control" required>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
@@ -149,14 +149,14 @@
                                     <input type="text" value="<?php if(isset($row)) echo $row['colonia']; ?>" name="colonia" placeholder="Colonia" class="form-control" required>
                                 </div>
                                 <div class="col-md-3 col-sm-12">
-                                    <label>Codigo Postal (CP)</label>
-                                    <input type="text" value="<?php if(isset($row)) echo $row['cp']; ?>" name="cp" placeholder="Codigo Postal" class="form-control" required>
+                                    <label>Código Postal (CP)</label>
+                                    <input type="text" value="<?php if(isset($row)) echo $row['cp']; ?>" name="cp" placeholder="Código Postal" class="form-control" required>
                                 </div>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-md-3 col-sm-12">
-                                    <label>Alcaldia</label>
+                                    <label>Alcaldía</label>
                                     <select class="form-select" name="alcaldia" required>
                                         <option value="Álvaro Obregón" <?php if($row['alcaldia'] == "Álvaro Obregón") echo "selected"; ?>>Álvaro Obregón</option>
                                         <option value="Azcapotzalco" <?php if($row['alcaldia'] == "Azcapotzalco") echo "selected"; ?>>Azcapotzalco</option>
@@ -177,11 +177,11 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
-                                    <label>Correo Electronico</label>
+                                    <label>Correo Electrónico</label>
                                     <input type="text" value="<?php if(isset($row)) echo $row['correo']; ?>" name="correo" placeholder="Correo Electronico" class="form-control" required>
                                 </div>
                                 <div class="col-md-3 col-sm-12">
-                                    <label>Telefono (Celular)</label>
+                                    <label>Télefono (Celular)</label>
                                     <input type="text" value="<?php if(isset($row)) echo $row['telefono']; ?>" name="tel" placeholder="Numero de Telefono" class="form-control" required>
                                 </div>
                             </div>
